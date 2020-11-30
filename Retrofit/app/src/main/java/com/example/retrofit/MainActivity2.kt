@@ -1,15 +1,18 @@
 package com.example.retrofit
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.OkHttpClient
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+
+
 
 
 class MainActivity2 : AppCompatActivity() {
@@ -18,30 +21,29 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
 
 
-        val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(15, TimeUnit.SECONDS)
-            .build()
+        var gson: Gson = GsonBuilder()
+                .setLenient()
+                .create()
+
+
         val regionRetrofit = Retrofit.Builder()
-            .baseUrl("https://apis.tracker.delivery/carriers/")
+            .baseUrl("http://3.137.223.127:3000")
             .addConverterFactory(GsonConverterFactory.create())
-
             .build()
-        var regionServer: RetrofitService? = regionRetrofit.create(RetrofitService::class.java)
+        var server: RetrofitService? = regionRetrofit.create(RetrofitService::class.java)
 
 
-        regionServer?.getInfo("json", "", "")?.enqueue(object : Callback<DataClass> {
-            override fun onFailure(call: Call<DataClass>, t: Throwable) {
+        server?.getInfo(1,"path")?.enqueue(object : Callback<ArrayList<DataClass>> {
+            override fun onFailure(callback: Call<ArrayList<DataClass>>, t: Throwable) {
                 t.printStackTrace()
-                println("fail")
             }
 
-            override fun onResponse(call: Call<DataClass>, response: Response<DataClass>) {
+            override fun onResponse(call: Call<ArrayList<DataClass>>, response: Response<ArrayList<DataClass>>) {
                 println("wow")
-                val appld = response?.body()?.body?.id // 이거는 내가 가져올 data class 에 있는 것들
+                val id =
+                val name = response.body()
                 val test: TextView = findViewById(R.id.test)
-                test.setText(appld.toString())
+               test.setText(id.toString())
                 println(response.raw())
             }
         })

@@ -1,14 +1,20 @@
 package com.example.retrofit
 
+import io.reactivex.Single
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RetrofitService {
-    //@Headers( "accept: application/json\",\n" +
-    //   "                        \"content-type: application/json" )
-    @GET("kr.cjlogistics")
-    fun getInfo(@Query("id")id:String,
-                @Query("name")name:String,
-                @Query("tel")tel:String) : Call<DataClass>
+
+
+    @GET("file/1")
+    @Headers( "content-type: application/json")
+    fun getInfo(
+            @Query("id") id : Int,
+            @Query("path")path  : String,
+    ) : Call<ArrayList<DataClass>>
+
+   /* @FormUrlEncoded
+    @POST("")
+    fun PostInfo(@Body dataBody: PostDataBody) :Call<PostData>*/
 }
