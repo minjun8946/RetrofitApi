@@ -8,11 +8,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.Chronometer
 import java.util.*
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.UnstableDefault
-import kotlinx.serialization.json.Json
 //import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import retrofit2.Retrofit
+
 fun rand(): List<Int> {
     val arr = arrayListOf<Int>()
     val random=  Random()
@@ -27,7 +24,8 @@ fun rand(): List<Int> {
 
 
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
+    lateinit var timenum : Chronometer // 시간
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -75,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         var count =0 // 누른 횟수 배열만들때 사용
         var chilk = 0 // 이것도 누른 횟수
 
+
         val start : Button = findViewById(R.id.start)
         timer1.stop()
         start.setOnClickListener{
@@ -113,12 +112,16 @@ class MainActivity : AppCompatActivity() {
             n29.setText(arr[28].toString())
             n30.setText(arr[29].toString())
         }
-
         fun fin(num : Int){
             if(num==60){
                 timer1.stop()
+                timenum = timer1
+                println(timenum)
+                //val a = DataClass.PostDataBody(timenum)
             }
         }
+
+
         n1.setOnClickListener{
             if(count>29) count =0
 
@@ -482,6 +485,5 @@ class MainActivity : AppCompatActivity() {
             }
             fin(chilk)
         }
-
     }
 }

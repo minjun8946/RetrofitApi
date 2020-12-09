@@ -7,14 +7,14 @@ import retrofit2.http.*
 interface RetrofitService {
 
 
-    @GET("file/1")
+    @GET("de.dhl")
     @Headers( "content-type: application/json")
     fun getInfo(
             @Query("id") id : Int,
             @Query("path")path  : String,
     ) : Call<ArrayList<DataClass>>
 
-   /* @FormUrlEncoded
-    @POST("")
-    fun PostInfo(@Body dataBody: PostDataBody) :Call<PostData>*/
+    /* @FormUrlEncoded
+     @POST("")
+     fun PostInfo(@Body dataBody: PostDataBody) :Call<PostData>*/
 }

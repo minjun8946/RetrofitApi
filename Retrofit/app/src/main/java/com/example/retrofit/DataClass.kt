@@ -1,37 +1,49 @@
 package com.example.retrofit
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import retrofit2.http.Header
-import retrofit2.http.Headers
-/*open class DataClass{
-    var path: String
+import android.widget.Chronometer
+import org.jetbrains.annotations.NotNull
+
+/*
+open class DataClass {
+
+    var time = MainActivity().timenum
+
+    fun request() : String {
+        return "time : ${time}"
+    }
+*/
+
+   /* var path: String
     var id: Int*/
+    //data class PostData(var postbody : PostDataBody)
 
-    data class PostData(var postbody : PostDataBody)
+
+   // data class PostDataBody(var time: Int, var path: String)
 
 
-    data class PostDataBody(
+
+    //data class DataClass(var body: DataClassBody)
+
+
+
+    data class DataClass(
+
+            //@SerializedName("id:")
+            //@Expose
             var id : Int,
-            var path : String)
+            //@SerializedName("path:")
+            //@Expose
+            var path : String){
+       fun print() {
+           val a = DataClass(id, path)
+           return println(id)
+       }
+    }
 
-
-
-    data class DataClass(var body: DataClassBody)
-
-
-    data class DataClassBody(
-
-            @SerializedName("id:")
-            @Expose
-            var id: Int,
-            @SerializedName("path:")
-            @Expose
-            var path : String = "", )
-
-    /*constructor (id: Int,path: String){
+   /* constructor (id: Int,path: String) {
         this.id = id
         this.path = path
-    }
-}*/
+    }*/
+//}
+
 
